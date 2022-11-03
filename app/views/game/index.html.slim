@@ -1,0 +1,28 @@
+.card-box.selected
+  - box_count = (0..3)
+  - box_count.each do |box|
+    p.card.empty
+
+.card-box.options
+  - @category.cards.each do |card|
+    div
+      .card.option = card.name
+
+javascript:
+  $(document).ready(function() {
+    const selected = new Map();
+    $(".card").click(function() {
+      debugger;
+      const title = this.getElementsByTagName("a")[0].title;
+      if (selected.size >= 4) {
+        return;
+      }
+      if (selected.has(title)) {
+        selected.delete(title);
+        this.classList.delete("selected");
+      } else {
+        selected.set(title, true);
+        this.classList.add("selected");
+      }
+    });
+  });
